@@ -1,5 +1,5 @@
 # Base image
-FROM node:18
+FROM node:latest
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -8,7 +8,9 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Install app dependencies
-RUN npm install
+RUN npm install -g npm@9.6.6
+
+RUN npm install -S --force
 
 # Bundle app source
 COPY . .
