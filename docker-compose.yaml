@@ -26,6 +26,18 @@ services:
       - 8080
     networks:
       - example-net
+    environment:
+      - URL_MONGO_DB=mongodb://mongo/nest
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo:latest
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongodb_data:/data/db
 networks:
   example-net:
     external: true
+volumes:
+  mongodb_data:
