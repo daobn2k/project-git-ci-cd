@@ -1,10 +1,10 @@
-FROM node as build
+FROM node:14-alpine as build
 
 WORKDIR  /app
 
 COPY package*.json ./
 
-RUN npm install -S
+RUN npm i
 
 COPY . .
 
