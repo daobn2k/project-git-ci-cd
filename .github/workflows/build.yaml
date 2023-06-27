@@ -50,44 +50,44 @@
         # step này đơn giản là show ra 1 string text sau 1 chuỗi sự kiện ở trên
         - name: Verify
           run: echo "Thành công rồi"
-    deploy:
-    # chỗ này có thể có hoặc ko needs là chờ 1 job nào đó xong r làm tiếp
-      needs: docker
-      runs-on: ubuntu-latest
-      # cấp quyền để chạy scripts
-      permissions:
-        packages: write
-        contents: read
+    # deploy:
+    # # chỗ này có thể có hoặc ko needs là chờ 1 job nào đó xong r làm tiếp
+    #   needs: docker
+    #   runs-on: ubuntu-latest
+    #   # cấp quyền để chạy scripts
+    #   permissions:
+    #     packages: write
+    #     contents: read
       
-      steps:
-      # tạo 1 step deploy
-        - name: Deploy
-          uses: appleboy/ssh-action@master
-          with:
-    # cấu hình connect to server
-              host: ${{ secrets.BUILD_HOSTING_NAME }}
-              username: ${{ secrets.BUILD_USER_NAME }}
-              password: ${{ secrets.BUILD_SSH_PASSWORD}}
-              port: 22
-              script_stop: true
-              # script connect -> trỏ đến folder project-git-ci-cd -> pull new code --> run docker compose up -d --build để run code mới trên server
-              script: |
-                echo "connect to server successfully"
-                sudo su
-                cd project-git-ci-cd
-                git pull
-                docker compose down  
-                docker compose up -d --build
-                echo "Deploy đã xong"
-    notification:
-      needs: deploy
-      runs-on: ubuntu-latest
+    #   steps:
+    #   # tạo 1 step deploy
+    #     - name: Deploy
+    #       uses: appleboy/ssh-action@master
+    #       with:
+    # # cấu hình connect to server
+    #           host: ${{ secrets.BUILD_HOSTING_NAME }}
+    #           username: ${{ secrets.BUILD_USER_NAME }}
+    #           password: ${{ secrets.BUILD_SSH_PASSWORD}}
+    #           port: 22
+    #           script_stop: true
+    #           # script connect -> trỏ đến folder project-git-ci-cd -> pull new code --> run docker compose up -d --build để run code mới trên server
+    #           script: |
+    #             echo "connect to server successfully"
+    #             sudo su
+    #             cd project-git-ci-cd
+    #             git pull
+    #             docker compose down  
+    #             docker compose up -d --build
+    #             echo "Deploy đã xong"
+    # notification:
+    #   needs: deploy
+    #   runs-on: ubuntu-latest
 
-      steps:
-        - name:
-          uses: appleboy/discord-action@master
-          with:
-            webhook_id: ${{ secrets.WEBHOOK_ID }}
-            webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
-            args: The ${{ github.event_name }} event triggered first step.
-            run: echo " ĐÃ THÀNH CÔNG"
+    #   steps:
+    #     - name:
+    #       uses: appleboy/discord-action@master
+    #       with:
+    #         webhook_id: ${{ secrets.WEBHOOK_ID }}
+    #         webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
+    #         args: The ${{ github.event_name }} event triggered first step.
+    #         run: echo " ĐÃ THÀNH CÔNG"
