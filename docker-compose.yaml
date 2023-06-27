@@ -21,14 +21,14 @@ services:
       context: ./backend
     hostname: backend
     ports:
-      - 8080:8080
+      - 2377:2377
     expose:
-      - 8080
+      - 2377
     networks:
       - example-net
     environment:
       - URL_MONGO_DB=mongodb://mongo/nest
-      - PORT=8080
+      - PORT=2377
     depends_on:
       - mongo
   mongo:
