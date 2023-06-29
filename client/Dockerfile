@@ -8,6 +8,8 @@ RUN npm i
 
 COPY . .
 
+ENV VITE_API_URL = 'http://private-vvdao.ddns.net/'
+
 RUN npm run build 
 
 FROM nginx
