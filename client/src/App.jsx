@@ -4,11 +4,8 @@ import './App.css';
 function App() {
   const [data, setData] = useState(0);
 
-  const urlApi = import.meta.env.VITE_API_URL;
-
-  console.log(urlApi, 'urlApi');
   const testGet = async () => {
-    const res = await axios.get(urlApi ? urlApi : 'http://localhost:8080/');
+    const res = await axios.get('http://private-vvdao.ddns.net/');
 
     setData(res?.data);
   };
