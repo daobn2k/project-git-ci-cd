@@ -1,9 +1,12 @@
 import { Injectable } from '@nestjs/common';
-var os = require("os");
+var os = require('os');
 var hostname = os.hostname();
 @Injectable()
 export class AppService {
   getHello(): string {
-    return 'Hello World!' + hostname;
+    return (
+      'Chào mừng bạn đã đến với Demo cụa Văn đạo :))))))) - Private IP' +
+      hostname
+    );
   }
 }
