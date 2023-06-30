@@ -4,7 +4,7 @@ var hostname = os.hostname();
 @Injectable()
 export class AppService {
   async getHello() {
-    const url = 'http://private-vvdao.ddns.net/';
+    const url = 'http://private-vvdao.ddns.net/api/user';
     const res = await fetch(url).then((res) => res.json());
 
     return {
