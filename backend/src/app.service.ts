@@ -3,10 +3,13 @@ var os = require('os');
 var hostname = os.hostname();
 @Injectable()
 export class AppService {
-  getHello(): string {
-    return (
-      'Chào mừng bạn đã đến với Demo cụa Văn đạo :))))))) - Private IP' +
-      hostname
-    );
+  async getHello() {
+    const url = 'http://private-vvdao.ddns.net/';
+    const res = await fetch(url).then((res) => res.json());
+
+    return {
+      data:
+        `Public Server connect to Private server ${url} and return ` + res.data,
+    };
   }
 }
