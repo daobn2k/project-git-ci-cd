@@ -8,8 +8,11 @@ export class UserService {
     return 'This action adds a new user';
   }
 
-  findAll() {
-    return `This action returns all user`;
+  async findAll() {
+    const url = 'http://private-vvdao.ddns.net/api/user';
+    const res = await fetch(url).then((res) => res.json());
+
+    return `This action returns all user` + res + 'data ->>>>private-network';
   }
 
   findOne(id: number) {
