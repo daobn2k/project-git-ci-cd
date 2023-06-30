@@ -5,7 +5,7 @@ function App() {
   const [data, setData] = useState(0);
 
   const testGet = async () => {
-    const res = await axios.get('http://vandao2k.ddns.net/api');
+    const res = await axios.get('http://vandao2k.ddns.net/');
 
     setData(res?.data);
   };
