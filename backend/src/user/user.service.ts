@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-
+import fetch from 'cross-fetch';
 @Injectable()
 export class UserService {
   create(createUserDto: CreateUserDto) {
@@ -9,10 +9,13 @@ export class UserService {
   }
 
   async findAll() {
-    const url = 'http://private-vvdao.ddns.net/api/user';
+    const url = 'http://localhost:7070/api/user';
     const res = await fetch(url).then((res) => res.json());
 
-    return `This action returns all user` + res + 'data ->>>>private-network';
+    return {
+      data:
+        `This action returns all user` + res.data + 'data ->>>>private-network',
+    };
   }
 
   findOne(id: number) {
